@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回声册</title>
+    <link rel="stylesheet" href="公共组件1.css">
+    <link rel="stylesheet" href="volume-detail.css">
+</head>
+<body>
+    <!-- 公共导航组件 -->
+    <ul class="main-nav">
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索你想查询的红色报纸">
+            <button class="search-btn">搜索</button>
+        </div>
+        <li><a href="index.html">🏠首页</a></li>
+        <li><a href="paper.html">📰回响报</a></li>
+        <li><a href="volume-detail.html">📚回声册</a></li>
+        <li><a href="profile.html">👤个人中心</a></li>
+    </ul>
+
+    <div class="header">
+        <h2>回声册</h2>
+    </div>
+
+    <div class="container">
+        <div class="filter-section">
+            <h3>筛选条件</h3>
+            <div class="form-group">
+                <div class="form-item">
+                    <label>历史时期：</label>
+                    <select id="periodSelect">
+                        <option value="all">全部时期</option>
+                        <option value="建党初期">建党初期(1921-1927)</option>
+                        <option value="土地革命">土地革命(1927-1937)</option>
+                        <option value="抗日战争">抗日战争(1937-1945)</option>
+                        <option value="解放战争">解放战争(1945-1949)</option>
+                        <option value="建国初期">建国初期(1949-1978)</option>
+                        <option value="改革开放">改革开放(1978-2012)</option>
+                        <option value="新时代">新时代(2012至今)</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label>月份：</label>
+                    <select id="monthSelect">
+                        <option value="0">所有月份</option>
+                        <option value="1">一月</option><option value="2">二月</option><option value="3">三月</option>
+                        <option value="4">四月</option><option value="5">五月</option><option value="6">六月</option>
+                        <option value="7">七月</option><option value="8">八月</option><option value="9">九月</option>
+                        <option value="10">十月</option><option value="11">十一月</option><option value="12">十二月</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label>内容类型：</label>
+                    <select id="typeSelect">
+                        <option value="all">全部类型</option>
+                        <option value="历史事件">历史事件</option>
+                        <option value="革命人物">革命人物</option>
+                        <option value="革命文章">革命文章</option>
+                    </select>
+                </div>
+                <div class="form-item button-group">
+                    <button class="btn-filter" id="filterBtn">筛选</button>
+                    <button class="btn-reset" id="resetBtn">重置筛选</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <table>
+                <thead>
+                    <tr class="th-main">
+                        <th>时光坐标</th>
+                        <th>事件标题</th>
+                        <th>历史时期</th>
+                        <th>素材来源</th>
+                        <th>重点人物/发生地点</th>
+                    </tr>
+                </thead>
+                <tbody id="eventTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="volume-detail.js"></script>
+<script src="search.js"></script>
+</body>
+</html>

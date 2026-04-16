@@ -1,0 +1,74 @@
+/* ========== 导航栏样式：米黄色背景、在标题上方 ========== */
+.main-nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  background-color: #f7f3e9; /* 米黄色 */
+  padding: 14px 20px;
+  width: 100%;
+  gap: 0; /* 内部统一用 justify-content 控制，不用 gap */
+}
+
+
+/* 搜索框：放在中间靠左 */
+.main-nav .search-box {
+  margin:  0 auto;
+  width: 360px;
+  max-width: 40%;
+}
+
+/* 右侧四个导航 */
+.main-nav li {
+  margin-left: 24px; /* 统一间距，保证整齐 */
+}
+
+/* 其他导航项样式 */
+.main-nav a {
+  color: #9b0c22;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+  white-space: nowrap; /* 不换行，保证整齐 */
+}
+.main-nav a:hover {
+  background-color: #f1e6d5;
+  transform: translateY(-1px);
+  color: #7a091a;
+}
+/* ========== 搜索栏样式（不变，交互保留） ========== */
+.search-box {
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.search-input:focus {
+    background-color: #fffdfa;
+    box-shadow: 0 0 6px rgba(155, 12, 34, 0.25);
+}
+.search-btn {
+    padding: 12px 25px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.search-btn:hover {
+    background-color: #d10a0a;
+}
+.search-btn:active {
+    transform: scale(0.96);
+}

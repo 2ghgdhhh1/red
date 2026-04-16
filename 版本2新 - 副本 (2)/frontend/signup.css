@@ -1,0 +1,315 @@
+/* 原有样式不变，只增加模态框和调整 loading-toast 样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft Yahei", "Segoe UI", Roboto, sans-serif;
+}
+body {
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #d32f2f;
+    padding-top: 80px; /* 为固定导航栏留出空间 */
+}
+.bg-carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: carouselAutoPlay 12s infinite ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    background-color: rgba(211, 47, 47, 0.3);
+}
+.carousel-slide.slide1 {
+    background-image: url("https://img1.baidu.com/it/u=2766692271,3737785196&fm=253&fmt=auto&app=138&f=JPEG?w=1920&h=1080");
+    animation-delay: 0s;
+    opacity: 1;
+}
+.carousel-slide.slide2 {
+    background-image: url("https://img0.baidu.com/it/u=3098773772,3454421126&fm=253&fmt=auto&app=138&f=JPEG?w=1920&h=1080");
+    animation-delay: 4s;
+}
+.carousel-slide.slide3 {
+    background-image: url("https://img2.baidu.com/it/u=1987674132,305937092&fm=253&fmt=auto&app=138&f=JPEG?w=1920&h=1080");
+    animation-delay: 8s;
+}
+@keyframes carouselAutoPlay {
+    0%, 33% { opacity: 1; }
+    34%, 100% { opacity: 0; }
+}
+.center-container {
+    width: 90%;
+    max-width: 1100px;
+    display: flex;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    z-index: 10;
+    overflow: hidden;
+    margin-top: 5%;
+}
+.left-info-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 24px 0 0 24px;
+    padding: 60px 40px;
+    text-align: center;
+}
+.left-info-card h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+.left-info-card .subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+.left-info-card .switch-tip {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+.left-info-card .login-link {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+.left-info-card .login-link:hover {
+    color: #ffd700;
+}
+.right-form-card {
+    flex: 1;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border-radius: 0 24px 24px 0;
+    padding: 60px 40px 40px;
+    position: relative;
+}
+.right-form-card input[type="radio"] {
+    display: none;
+}
+.tab-bar {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+.tab-btn {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0 10px;
+}
+#signup-tab:checked ~ .tab-bar .tab-btn[for="signup-tab"],
+#login-tab:checked ~ .tab-bar .tab-btn[for="login-tab"] {
+    color: #fff;
+    font-weight: 700;
+}
+.form-container {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+}
+#signup-tab:checked ~ .signup-form {
+    display: flex;
+}
+#login-tab:checked ~ .login-form {
+    display: flex;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.input-group input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    background: transparent;
+    font-size: 1rem;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+.input-group input:focus {
+    border-bottom-color: #fff;
+}
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #d32f2f;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+.btn-submit:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+@media (max-width: 900px) {
+    .center-container {
+        flex-direction: column;
+        width: 95%;
+        max-width: 500px;
+    }
+    .left-info-card, .right-form-card {
+        width: 100%;
+        border-radius: 24px;
+    }
+    .left-info-card {
+        border-radius: 24px 24px 0 0;
+        padding: 40px 30px;
+    }
+    .right-form-card {
+        border-radius: 0 0 24px 24px;
+        padding: 60px 30px 40px;
+    }
+}
+.loading-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+.loading-toast.show {
+    opacity: 1;
+    pointer-events: none;
+}
+/* 自定义模态框 */
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+}
+.custom-modal.show {
+    visibility: visible;
+    opacity: 1;
+}
+.custom-modal-content {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    min-width: 300px;
+}
+.custom-modal-content p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #333;
+    line-height: 1.4;
+}
+.modal-ok-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 30px;
+    border-radius: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.modal-ok-btn:hover {
+    background: #bb2d3b;
+}
+.note-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+.note-input {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 14px;
+}
+.note-buttons {
+    display: flex;
+    gap: 10px;
+}
+.btn-edit {
+    padding: 5px 12px;
+    background: #409eff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.btn-save {
+    padding: 5px 12px;
+    background: #67c23a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}

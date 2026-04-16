@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>红色回响 - 首页</title>
+    <!-- 引入Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- 引入Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- 引入SQL.js库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <style>
+        /* 🔥 1. 引入公共组件的全局样式 (来自 公共组件1.css) */
+        /* 导航栏样式：米黄色背景、在标题上方 */
+        .main-nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            background-color: #f7f3e9; /* 米黄色 */
+            padding: 14px 20px;
+            width: 100%;
+            gap: 0;
+        }
+        /* 搜索框：放在中间靠左 */
+        .main-nav .search-box {
+            margin: 0 auto;
+            width: 360px;
+            max-width: 40%;
+        }
+        /* 右侧四个导航 */
+        .main-nav li {
+            margin-left: 24px;
+        }
+        /* 其他导航项样式 */
+        .main-nav a {
+            color: #9b0c22;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .main-nav a:hover {
+            background-color: #f1e6d5;
+            transform: translateY(-1px);
+            color: #7a091a;
+        }
+        /* 搜索栏样式 */
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            background-color: #fffdfa;
+            box-shadow: 0 0 6px rgba(155, 12, 34, 0.25);
+        }
+        .search-btn {
+            padding: 12px 25px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .search-btn:hover {
+            background-color: #d10a0a;
+        }
+        .search-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* 🔥 2. 保留首页原有的特色样式 */
+        :root { 
+            --red-primary: #B71C1C; 
+            --red-light: #E53935; 
+            --paper-bg: #FFF8E1; 
+            --text-dark: #212122; 
+        }
+        body { 
+            background-color: var(--paper-bg); 
+            color: var(--text-dark); 
+            font-family: "SimSun", "Microsoft YaHei", serif; 
+            line-height: 1.8; 
+            padding-top: 70px; 
+        }
+        /* 首页横幅 */
+        .masthead { 
+            background: linear-gradient(rgba(183, 28, 28, 0.9), rgba(183, 28, 28, 0.8)), url('https://picsum.photos/1920/900?grayscale') center/cover no-repeat; 
+            height: 80vh; 
+            display: flex; 
+            align-items: center; 
+            color: white; 
+            text-align: center; 
+        }
+        .site-heading { 
+            animation: fadeIn 1.2s ease-out; 
+        }
+        .site-heading h1 { 
+            font-size: 4rem; 
+            font-weight: bold; 
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4); 
+            letter-spacing: 0.3rem; 
+        }
+        .site-heading .subheading { 
+            font-size: 1.8rem; 
+            margin-top: 1rem; 
+            opacity: 0.9; 
+        }
+        /* 报纸栏目标题 */
+        .section-title { 
+            color: var(--red-primary); 
+            font-size: 2rem; 
+            font-weight: bold; 
+            margin: 3rem 0 1.5rem; 
+            position: relative; 
+            display: inline-block; 
+        }
+        .section-title::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: -8px; 
+            left: 0; 
+            width: 60px; 
+            height: 3px; 
+            background-color: var(--red-primary); 
+        }
+        /* 卡片悬停效果 */
+        .paper-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .paper-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-text {
+            flex: 1;
+        }
+        .paper-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        /* 页脚 */
+        footer {
+            background-color: #1a1a1a;
+            color: #999;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔴 导航栏 (公共组件) -->
+    <ul class="main-nav">
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索你想查询的红色报纸">
+            <button class="search-btn">搜索</button>
+        </div>
+        <li><a href="index.html">🏠首页</a></li>
+        <li><a href="paper.html">📰回响报</a></li>
+        <li><a href="volume-detail.html">📚回声册</a></li>
+        <li><a href="profile.html">👤个人中心</a></li>
+    </ul>
+
+    <!-- 🟢 首页主体内容 -->
+    <header class="masthead">
+        <div class="container">
+            <div class="site-heading">
+                <h1>红色回响</h1>
+                <span class="subheading">传承红色基因 · 弘扬革命精神</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 新报速递 -->
+    <div class="container my-5">
+        <h2 class="section-title">新报速递</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card paper-card">
+                    <img src="https://picsum.photos/seed/autumn/300/200" class="card-img-top paper-img" alt="秋收起义">
+                    <div class="card-body">
+                        <h5 class="card-title">第1期：秋收起义</h5>
+                        <p class="card-text">1927年9月，毛泽东领导秋收起义，创建了中国工农红军。</p>
+                        <a href="paper.html?issue=1" class="btn btn-outline-danger">立即阅读</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card paper-card">
+                    <img src="https://picsum.photos/seed/jinggang/300/200" class="card-img-top paper-img" alt="井冈山会师">
+                    <div class="card-body">
+                        <h5 class="card-title">第2期：井冈山会师</h5>
+                        <p class="card-text">1928年4月，朱德、毛泽东在井冈山会师，壮大了革命力量。</p>
+                        <a href="paper.html?issue=2" class="btn btn-outline-danger">立即阅读</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card paper-card">
+                    <img src="https://picsum.photos/seed/longmarch/300/200" class="card-img-top paper-img" alt="长征胜利">
+                    <div class="card-body">
+                        <h5 class="card-title">第3期：长征胜利</h5>
+                        <p class="card-text">1936年10月，红军三大主力会师，长征胜利结束。</p>
+                        <a href="paper.html?issue=3" class="btn btn-outline-danger">立即阅读</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card paper-card">
+                    <img src="https://picsum.photos/seed/battles/300/200" class="card-img-top paper-img" alt="三大战役">
+                    <div class="card-body">
+                        <h5 class="card-title">第4期：三大战役</h5>
+                        <p class="card-text">1948-1949年，辽沈、淮海、平津三大战役，奠定了解放战争胜利基础。</p>
+                        <a href="paper.html?issue=4" class="btn btn-outline-danger">立即阅读</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card paper-card">
+                    <img src="https://picsum.photos/seed/1949/300/200" class="card-img-top paper-img" alt="新中国成立">
+                    <div class="card-body">
+                        <h5 class="card-title">第5期：新中国成立</h5>
+                        <p class="card-text">1949年10月1日，中华人民共和国成立，中国人民从此站立起来了。</p>
+                        <a href="paper.html?issue=5" class="btn btn-outline-danger">立即阅读</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="border-top mt-5">
+        <div class="container text-center">
+            <p>© 2026 红色日报. 保留所有权利.</p>
+            <p>本网站旨在弘扬红色文化，传承革命精神。</p>
+        </div>
+    </footer>
+
+<script src="index.js"></script>
+<script src="search.js"></script>
+</body>
+</html>
